@@ -83,7 +83,8 @@
     if (sqlite3_open([dbPathString UTF8String], &dataDB)== SQLITE_OK) {
        
         
-        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PERSONS(NAME,AGE) values ('%s', '%d')",[self.nameField.text UTF8String],[self.ageField.text intValue]];
+        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PERSONS(NAME,AGE) values ('%s', '%d')",[self.nameField.text UTF8String],
+                                [self.ageField.text intValue]];
         const char *insert_stmt = [insertStmt UTF8String];
         
         if (sqlite3_exec(dataDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK) {
@@ -107,9 +108,36 @@
 }
 
 
-
+//query
 - (IBAction)qbutton:(id)sender {
     
+   /*
+    
+    sqlite3_stmt *statement;
+    
+    if (sqlite3_open([dbPathString UTF8String],&dataDB)==SQLITE_OK) {
+        [arrayOfData removeAllObjects];
+        
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM PERSONS"];
+        const char* query_sql = [querySql UTF8String];
+        
+        if(sqlite3_prepare(dataDB, query_sql, -1, &statement, NULL)==SQLITE_OK){
+            while (sqlite3_step(statement)==SQLITE_OK) {
+                NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
+                NSString  *ageString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                
+                data *person = [[data alloc]init];
+                
+                [person setName:name];
+                
+                [person setAge:[ageString intValue]];
+                
+                [arrayOfData addObject:person];
+                
+            } 
+        }
+    }
+    [[self tableres]reloadData];*/
     
 }
 
