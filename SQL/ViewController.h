@@ -12,7 +12,8 @@
 
 @interface ViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *tf;
+
+@property (weak, nonatomic) IBOutlet UITextField *searchField;
 @property (weak, nonatomic) IBOutlet UILabel *result;
 @property (weak, nonatomic) IBOutlet UITableView *tableres;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
@@ -20,7 +21,7 @@
 
 - (IBAction)qbutton:(id)sender;
 - (IBAction)addPersonButton:(id)sender;
-- (IBAction)deletePersonButton:(id)sender;
-
+//- (IBAction)deletePersonButton:(id)sender;
+- (IBAction)search:(id)sender;
 
 @end

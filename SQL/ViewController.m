@@ -18,6 +18,9 @@
 @end
 
 @implementation ViewController
+@synthesize searchField;
+@synthesize result;
+
 
 - (void)viewDidLoad
 {
@@ -30,35 +33,46 @@
     
 }
 
-- (void)createOrOpenDB{
+- (void)viewDidUnload
+{
+    [self setSearchField:nil];
+    [self setResult:nil];
+    [super viewDidUnload];
+    
+}
+
+-(void)createOrOpenDB
+{
     NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docPath = [path objectAtIndex:0];
     
-    dbPathString =[docPath stringByAppendingPathComponent:@"data.db"];
+    dbPathString = [docPath stringByAppendingPathComponent:@"data.db"];
     
     char *error;
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath: dbPathString]) {
+    if (![fileManager fileExistsAtPath:dbPathString]) {
         const char *dbPath = [dbPathString UTF8String];
         
-        //create db here
         if (sqlite3_open(dbPath, &dataDB)==SQLITE_OK) {
-            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS PERSONS (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, AGE INTEGER)";
+            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS PERSONS (ID INTEGER PRIMARY   KEY AUTOINCREMENT, NAME TEXT, AGE INTEGER)";
             sqlite3_exec(dataDB, sql_stmt, NULL, NULL, &error);
             sqlite3_close(dataDB);
-            
-        } 
+        }
     }
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView   {
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return [arrayOfData count];
 }
+
+
 //formating results on table
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
@@ -111,7 +125,7 @@
 //query
 - (IBAction)qbutton:(id)sender {
     
-   /*
+   
     
     sqlite3_stmt *statement;
     
@@ -122,14 +136,13 @@
         const char* query_sql = [querySql UTF8String];
         
         if(sqlite3_prepare(dataDB, query_sql, -1, &statement, NULL)==SQLITE_OK){
-            while (sqlite3_step(statement)==SQLITE_OK) {
+            while (sqlite3_step(statement)==SQLITE_ROW) {
                 NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
                 NSString  *ageString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
                 
                 data *person = [[data alloc]init];
                 
                 [person setName:name];
-                
                 [person setAge:[ageString intValue]];
                 
                 [arrayOfData addObject:person];
@@ -137,11 +150,78 @@
             } 
         }
     }
-    [[self tableres]reloadData];*/
+    [[self tableres]reloadData];
     
 }
 
 
-- (IBAction)deletePersonButton:(id)sender {
+/*- (IBAction)deletePersonButton:(id)sender {
+    
+
+}*/
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event    {
+    [super touchesBegan:touches withEvent:event];
+    [[self ageField]resignFirstResponder];
+    [[self nameField]resignFirstResponder];
+    [[self searchField]resignFirstResponder];
+
+}
+
+
+- (IBAction)search:(id)sender {
+    NSString *qsearch = searchField.text;
+    sqlite3_stmt *statement;
+    result.text = searchField.text;
+    
+    if (sqlite3_open([dbPathString UTF8String],&dataDB)==SQLITE_OK) {
+        [arrayOfData removeAllObjects];
+        
+
+        NSString *nsquery = [[NSString alloc] initWithFormat:@"SELECT * FROM PERSONS WHERE NAME LIKE '%@'", qsearch];
+        const char* query_sql = [nsquery UTF8String];
+        if(sqlite3_prepare(dataDB, query_sql, -1, &statement, NULL)==SQLITE_OK){
+            while (sqlite3_step(statement)==SQLITE_ROW) {
+                NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
+                NSString  *ageString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                
+                data *person = [[data alloc]init];
+                
+                [person setName:name];
+                [person setAge:[ageString intValue]];
+                
+                [arrayOfData addObject:person];
+                
+            }
+        }
+    }
+    [[self tableres]reloadData];
+    
+  /*  sqlite3_stmt *statement;
+    if (sqlite3_open([dbPathString UTF8String],&dataDB)==SQLITE_OK) {
+        [arrayOfData removeAllObjects];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM PERSONS"];
+       // NSString *searchQuery = [[NSString alloc] initWithFormat:[@"SELECT * FROM PERSONS WHERE NAME LIKE '%@'" ];//], searchField.text];
+       // NSString *searchQuery = [NSString stringWithFormat:@"SELECT * FROM PERSONS WHERE NAME LIKE JAY" ];//], searchField.text];
+        const char* query_sql = [querySql UTF8String];
+        
+        if(sqlite3_prepare(dataDB, query_sql, -1, &statement, NULL)==SQLITE_OK){
+            while (sqlite3_step(statement)==SQLITE_ROW) {
+                NSString *name = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
+                NSString  *ageString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                
+                data *person = [[data alloc]init];
+                
+                [person setName:name];
+                [person setAge:[ageString intValue]];
+                
+                [arrayOfData addObject:person];
+                
+            }
+        }
+    }
+    [[self tableres]reloadData];
+        
+    */
 }
 @end
