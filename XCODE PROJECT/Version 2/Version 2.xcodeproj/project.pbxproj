@@ -17,8 +17,10 @@
 		222756FC177C426800F219CD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 222756FB177C426800F219CD /* Default@2x.png */; };
 		222756FE177C426800F219CD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 222756FD177C426800F219CD /* Default-568h@2x.png */; };
 		22275701177C426800F219CD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 222756FF177C426800F219CD /* MainStoryboard.storyboard */; };
-		22275704177C426800F219CD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22275703177C426800F219CD /* ViewController.m */; };
+		22275704177C426800F219CD /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22275703177C426800F219CD /* FirstViewController.m */; };
 		2227570C177C427B00F219CD /* data.m in Sources */ = {isa = PBXBuildFile; fileRef = 2227570B177C427B00F219CD /* data.m */; };
+		2227570E177C43BF00F219CD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2227570D177C43BF00F219CD /* libsqlite3.0.dylib */; };
+		22275711177C490A00F219CD /* mydata.m in Sources */ = {isa = PBXBuildFile; fileRef = 22275710177C490A00F219CD /* mydata.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,10 +38,13 @@
 		222756FB177C426800F219CD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		222756FD177C426800F219CD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		22275700177C426800F219CD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		22275702177C426800F219CD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		22275703177C426800F219CD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		22275702177C426800F219CD /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		22275703177C426800F219CD /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		2227570A177C427B00F219CD /* data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = data.h; sourceTree = "<group>"; };
 		2227570B177C427B00F219CD /* data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = data.m; sourceTree = "<group>"; };
+		2227570D177C43BF00F219CD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		2227570F177C490A00F219CD /* mydata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mydata.h; sourceTree = "<group>"; };
+		22275710177C490A00F219CD /* mydata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mydata.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2227570E177C43BF00F219CD /* libsqlite3.0.dylib in Frameworks */,
 				222756E8177C426800F219CD /* UIKit.framework in Frameworks */,
 				222756EA177C426800F219CD /* Foundation.framework in Frameworks */,
 				222756EC177C426800F219CD /* CoreGraphics.framework in Frameworks */,
@@ -59,6 +65,7 @@
 		222756DB177C426800F219CD = {
 			isa = PBXGroup;
 			children = (
+				2227570D177C43BF00F219CD /* libsqlite3.0.dylib */,
 				222756ED177C426800F219CD /* Version 2 */,
 				222756E6177C426800F219CD /* Frameworks */,
 				222756E5177C426800F219CD /* Products */,
@@ -91,9 +98,11 @@
 				222756F6177C426800F219CD /* AppDelegate.h */,
 				222756F7177C426800F219CD /* AppDelegate.m */,
 				222756FF177C426800F219CD /* MainStoryboard.storyboard */,
-				22275702177C426800F219CD /* ViewController.h */,
-				22275703177C426800F219CD /* ViewController.m */,
+				22275702177C426800F219CD /* FirstViewController.h */,
+				22275703177C426800F219CD /* FirstViewController.m */,
 				222756EE177C426800F219CD /* Supporting Files */,
+				2227570F177C490A00F219CD /* mydata.h */,
+				22275710177C490A00F219CD /* mydata.m */,
 			);
 			path = "Version 2";
 			sourceTree = "<group>";
@@ -180,8 +189,9 @@
 			files = (
 				222756F4177C426800F219CD /* main.m in Sources */,
 				222756F8177C426800F219CD /* AppDelegate.m in Sources */,
-				22275704177C426800F219CD /* ViewController.m in Sources */,
+				22275704177C426800F219CD /* FirstViewController.m in Sources */,
 				2227570C177C427B00F219CD /* data.m in Sources */,
+				22275711177C490A00F219CD /* mydata.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
