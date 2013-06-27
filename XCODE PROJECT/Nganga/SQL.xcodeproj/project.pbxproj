@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2280ACE0177A9C130025A276 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2280ACDF177A9C130025A276 /* icon.png */; };
 		22DBFDF11772ED640069DA58 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DBFDF01772ED640069DA58 /* UIKit.framework */; };
 		22DBFDF31772ED640069DA58 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DBFDF21772ED640069DA58 /* Foundation.framework */; };
 		22DBFDF51772ED640069DA58 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DBFDF41772ED640069DA58 /* CoreGraphics.framework */; };
@@ -24,7 +23,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2280ACDF177A9C130025A276 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		22DBFDED1772ED640069DA58 /* SQL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SQL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DBFDF01772ED640069DA58 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22DBFDF21772ED640069DA58 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -65,7 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				22DBFE131772EDD00069DA58 /* libsqlite3.0.dylib */,
-				2280ACDF177A9C130025A276 /* icon.png */,
 				22DBFDF61772ED640069DA58 /* SQL */,
 				22DBFDEF1772ED640069DA58 /* Frameworks */,
 				22DBFDEE1772ED640069DA58 /* Products */,
@@ -175,7 +172,6 @@
 				22DBFE051772ED640069DA58 /* Default@2x.png in Resources */,
 				22DBFE071772ED650069DA58 /* Default-568h@2x.png in Resources */,
 				22DBFE0D1772ED650069DA58 /* ViewController.xib in Resources */,
-				2280ACE0177A9C130025A276 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -44,7 +44,7 @@
     NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docPath = [path objectAtIndex:0];
     
-    dbPathString = [docPath stringByAppendingPathComponent:@"NEWPLANS.db"];
+    dbPathString = [docPath stringByAppendingPathComponent:@"SETONE.db"];
     
     char *error;
     
