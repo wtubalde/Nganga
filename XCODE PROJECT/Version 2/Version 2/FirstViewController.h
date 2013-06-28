@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableres;
 
 - (IBAction)qbutton:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *label;
 
 @end

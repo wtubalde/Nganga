@@ -17,8 +17,10 @@
 
 @end
 
-@implementation FirstViewController
 
+
+@implementation FirstViewController
+@synthesize label;
 
 - (void)viewDidLoad
 {
@@ -65,24 +67,12 @@
     }
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [arrayOfData count];
-}
-
--(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index     {
-    return 1;
-}
 
 //formating results on table
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"cellType";
-    NSString *dollars = @"$";
+    NSString *dollars = @"Cost - $";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
@@ -108,8 +98,24 @@
     return cell;
 }
 
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [arrayOfData count];
+}
+
+-(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index     {
+    return 1;
+}
+
+
 //adding data
--(IBAction)addPersonButton :(id)sender{
+//-(IBAction)addPersonButton :(id)sender{
     /*
      char *error;
      if (sqlite3_open([dbPathString UTF8String], &dataDB)== SQLITE_OK) {
@@ -137,7 +143,7 @@
      {
      [super didReceiveMemoryWarning];
      // Dispose of any resources that can be recreated.*/
-}
+//}
 
 
 //query
@@ -168,7 +174,9 @@
         }
     }
     [[self tableres]reloadData];
+   
     
+    label.text = @"String";
 }
 
 //CLoseKeyboard on touch

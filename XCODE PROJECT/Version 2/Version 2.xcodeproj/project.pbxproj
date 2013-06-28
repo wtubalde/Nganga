@@ -18,9 +18,9 @@
 		222756FE177C426800F219CD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 222756FD177C426800F219CD /* Default-568h@2x.png */; };
 		22275701177C426800F219CD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 222756FF177C426800F219CD /* MainStoryboard.storyboard */; };
 		22275704177C426800F219CD /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22275703177C426800F219CD /* FirstViewController.m */; };
-		2227570C177C427B00F219CD /* data.m in Sources */ = {isa = PBXBuildFile; fileRef = 2227570B177C427B00F219CD /* data.m */; };
 		2227570E177C43BF00F219CD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2227570D177C43BF00F219CD /* libsqlite3.0.dylib */; };
 		22275711177C490A00F219CD /* mydata.m in Sources */ = {isa = PBXBuildFile; fileRef = 22275710177C490A00F219CD /* mydata.m */; };
+		22EE353E177D308F00F5606F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EE353C177D308F00F5606F /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,11 +40,11 @@
 		22275700177C426800F219CD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		22275702177C426800F219CD /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		22275703177C426800F219CD /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		2227570A177C427B00F219CD /* data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = data.h; sourceTree = "<group>"; };
-		2227570B177C427B00F219CD /* data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = data.m; sourceTree = "<group>"; };
 		2227570D177C43BF00F219CD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		2227570F177C490A00F219CD /* mydata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mydata.h; sourceTree = "<group>"; };
 		22275710177C490A00F219CD /* mydata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mydata.m; sourceTree = "<group>"; };
+		22EE353B177D308F00F5606F /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		22EE353C177D308F00F5606F /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,16 +93,16 @@
 		222756ED177C426800F219CD /* Version 2 */ = {
 			isa = PBXGroup;
 			children = (
-				2227570A177C427B00F219CD /* data.h */,
-				2227570B177C427B00F219CD /* data.m */,
+				2227570F177C490A00F219CD /* mydata.h */,
+				22275710177C490A00F219CD /* mydata.m */,
 				222756F6177C426800F219CD /* AppDelegate.h */,
 				222756F7177C426800F219CD /* AppDelegate.m */,
+				22EE353B177D308F00F5606F /* ViewController.h */,
+				22EE353C177D308F00F5606F /* ViewController.m */,
 				222756FF177C426800F219CD /* MainStoryboard.storyboard */,
 				22275702177C426800F219CD /* FirstViewController.h */,
 				22275703177C426800F219CD /* FirstViewController.m */,
 				222756EE177C426800F219CD /* Supporting Files */,
-				2227570F177C490A00F219CD /* mydata.h */,
-				22275710177C490A00F219CD /* mydata.m */,
 			);
 			path = "Version 2";
 			sourceTree = "<group>";
@@ -190,8 +190,8 @@
 				222756F4177C426800F219CD /* main.m in Sources */,
 				222756F8177C426800F219CD /* AppDelegate.m in Sources */,
 				22275704177C426800F219CD /* FirstViewController.m in Sources */,
-				2227570C177C427B00F219CD /* data.m in Sources */,
 				22275711177C490A00F219CD /* mydata.m in Sources */,
+				22EE353E177D308F00F5606F /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +314,7 @@
 				22275709177C426800F219CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
