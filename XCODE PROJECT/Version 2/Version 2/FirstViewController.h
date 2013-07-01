@@ -13,8 +13,13 @@
 @interface FirstViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableres;
-
 - (IBAction)qbutton:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *label;
+- (IBAction)addDatabutton:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *plannameField;
+@property (weak, nonatomic) IBOutlet UITextField *dateField;
+@property (weak, nonatomic) IBOutlet UITextField *costField;
+
+
 
 @end

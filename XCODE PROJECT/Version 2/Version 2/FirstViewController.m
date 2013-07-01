@@ -21,6 +21,7 @@
 
 @implementation FirstViewController
 @synthesize label;
+@synthesize tableres;
 
 - (void)viewDidLoad
 {
@@ -55,12 +56,12 @@
         
         if (sqlite3_open(dbPath, &dataDB)==SQLITE_OK) {
             const char *sql_stmt = "CREATE TABLE IF NOT EXISTS PLANS (PLANID INTEGER PRIMARY KEY AUTOINCREMENT, PLANNAME TEXT, DATE INTEGER, COST REAL)";
-            
+            //const char *sql_insert = "INSERT INTO PLANS(PLANNAME,DATE,COST) values ('IngeniSUPER PLAN', '08-22-2013', '299.99')";
             //NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,DATE,COST) values ('IngeniSUPER PLAN', '08-22-2013', '299.99')"];
             // const char *insert_stmt = [insertStmt UTF8String];
             
             sqlite3_exec(dataDB, sql_stmt, NULL, NULL, &error);
-            //sqlite3_exec(dataDB, insert_stmt, NULL ,NULL , &error);
+           // sqlite3_exec(dataDB, sql_insert, NULL ,NULL , &error);
             //sqlite3_exec(dataDB, temp_stmt, NULL, NULL, &error);
             sqlite3_close(dataDB);
         }
@@ -99,6 +100,48 @@
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    static NSString *CellIdentifier = @"cellType";
+   
+   
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    mydata *aPlan = [arrayOfData objectAtIndex:indexPath.row];
+    NSString *dollars = @"Cost - $hhhhhhhhhhjsdhjfhsdkjfksdhfkjhsdjkf\n --\n--hskjdhfkjsdhfjkshjkdfh";
+    NSString *concat = @"";
+    NSString *plan = aPlan.planName;
+    NSString *date = aPlan.date;
+    NSString *costValue = [NSString stringWithFormat:@"%.2f", aPlan.cost];
+    
+
+    
+    UIAlertView *messageAlert = [[UIAlertView alloc]
+                                 //initWithTitle:@"Row Selected" message:@"You've selected a row" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                    initWithTitle:plan message:[dollars stringByAppendingString:costValue] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    // Display Alert Message
+    [messageAlert show];
+    
+}
+
+/*
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    BATTrailsViewController *trailsController = [[BATTrailsViewController alloc] initWithStyle:UITableViewStylePlain];
+    trailsController.selectedRegion = [regions objectAtIndex:indexPath.row];
+    [[self navigationController] pushViewController:trailsController animated:YES];
+    [trailsController release];
+}*/
+
+
+
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -113,40 +156,7 @@
     return 1;
 }
 
-
-//adding data
-//-(IBAction)addPersonButton :(id)sender{
-    /*
-     char *error;
-     if (sqlite3_open([dbPathString UTF8String], &dataDB)== SQLITE_OK) {
-     
-     
-     //NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,AGE) values ('%s', '%d')",[self.nameField.text UTF8String],[self.ageField.text intValue]];
-     NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,DATE,COST) values ('IngeniSUPER PLAN', '08-22-2013', '299.99')"];
-     const char *insert_stmt = [insertStmt UTF8String];
-     
-     if (sqlite3_exec(dataDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK) {
-     NSLog(@"Person Added");
-     
-     data *person  = [[data alloc] init];
-     
-     [person setName:self.nameField.text];
-     [person setAge:[self.ageField.text intValue]];
-     
-     [arrayOfData addObject: person];
-     }
-     }
-     sqlite3_close(dataDB);
-     }
-     
-     - (void)didReceiveMemoryWarning
-     {
-     [super didReceiveMemoryWarning];
-     // Dispose of any resources that can be recreated.*/
-//}
-
-
-//query
+//querying
 - (IBAction)qbutton:(id)sender {
     
     sqlite3_stmt *statement;
@@ -176,13 +186,70 @@
     [[self tableres]reloadData];
    
     
-    label.text = @"String";
+    label.text = @"Updated!";
 }
 
 //CLoseKeyboard on touch
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event    {
     [super touchesBegan:touches withEvent:event];
+    [[self dateField]resignFirstResponder];
+    [[self costField]resignFirstResponder];
+    [[self plannameField]resignFirstResponder];
 }
+
+//adding data
+- (IBAction)addDatabutton:(id)sender {
+    
+    
+    char *error;
+    if (sqlite3_open([dbPathString UTF8String], &dataDB)== SQLITE_OK) {
+        
+        
+        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,DATE,COST) values ('%s', '%s', '%d')",[self.plannameField.text UTF8String],[self.dateField.text UTF8String],[self.costField.text intValue]];
+        //NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,DATE,COST) values ('IngeniSUPER PLAN', '08-22-2013', '299.99')"];
+        const char *insert_stmt = [insertStmt UTF8String];
+        
+        if (sqlite3_exec(dataDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK) {
+            NSLog(@"Person Added");
+            
+            mydata *person  = [[mydata alloc] init];
+            
+            [person setPlanName:self.plannameField.text];
+            [person setDate:self.dateField.text];
+            [person setCost:[self.costField.text intValue]];
+            
+            [arrayOfData addObject: person];
+        }
+    }
+    sqlite3_close(dataDB);
+     [[self tableres]reloadData];
+    label.text = @"Data Added";
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.*/
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if (self) {
+        // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView:) name:@"ReloadTableView" object:nil];
+    }
+    return self;
+}
+
+- (void)reloadTableView:(NSNotification*)notification
+{
+    [tableres reloadData];
+}
+
+
+
+@end
+
 
 //searching
 //- (IBAction)search:(id)sender {
@@ -213,4 +280,3 @@
  }
  [[self tableres]reloadData];*/
 //}
-@end
