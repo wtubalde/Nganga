@@ -99,7 +99,7 @@
     return cell;
 }
 
-
+//getting info from tapped cellview
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -112,7 +112,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     mydata *aPlan = [arrayOfData objectAtIndex:indexPath.row];
-    NSString *dollars = @"Cost - $hhhhhhhhhhjsdhjfhsdkjfksdhfkjhsdjkf\n --\n--hskjdhfkjsdhfjkshjkdfh";
+    NSString *dollars = @"Peak(####kWh) = $####\nOff Peak(####kWh) = $####\nSupply(####kWh) = $####\n\n<ORIGIN ENRGY>\nRate Freeze - # - Day Time Use\n[Citipower Network]\nhttp://www.originenergy.com.au/******\nA 1% discount of the energy usage charges will apply if your bill is paid by direct debit.";
     NSString *concat = @"";
     NSString *plan = aPlan.planName;
     NSString *date = aPlan.date;
@@ -196,8 +196,8 @@
     [[self costField]resignFirstResponder];
     [[self plannameField]resignFirstResponder];
 }
-
-//adding data
+ 
+//adding data Code
 - (IBAction)addDatabutton:(id)sender {
     
     
@@ -251,7 +251,7 @@
 @end
 
 
-//searching
+//searching Code
 //- (IBAction)search:(id)sender {
 /*
  NSString *qsearch = searchField.text;
