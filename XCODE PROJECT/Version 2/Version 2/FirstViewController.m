@@ -46,7 +46,7 @@
     NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docPath = [path objectAtIndex:0];
     
-    dbPathString = [docPath stringByAppendingPathComponent:@"SETONE.db"];
+    dbPathString = [docPath stringByAppendingPathComponent:@"PLANS.db"];
     
     char *error;
     
@@ -55,12 +55,14 @@
         const char *dbPath = [dbPathString UTF8String];
         
         if (sqlite3_open(dbPath, &dataDB)==SQLITE_OK) {
-            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS PLANS (PLANID INTEGER PRIMARY KEY AUTOINCREMENT, PLANNAME TEXT, DATE INTEGER, COST REAL)";
+            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS PLANS (PLANID INTEGER PRIMARY KEY AUTOINCREMENT, PLANNAME TEXT, STARTDATE INTEGER, ENDINGDATE INTEGER,COST REAL, KWUSED INTEGER, DISCOUNTS INTEGER)";
+            //const char *sql_stmt2 = "CREATE TABLE IF NOT EXISTS PLANDETAIL (DETAILID INTEGER PRIMARY KEY AUTOINCREMENT, PLANNAME TEXT, KWUSED INTEGER, PERFECTDISCOUT)";
             //const char *sql_insert = "INSERT INTO PLANS(PLANNAME,DATE,COST) values ('IngeniSUPER PLAN', '08-22-2013', '299.99')";
             //NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,DATE,COST) values ('IngeniSUPER PLAN', '08-22-2013', '299.99')"];
             // const char *insert_stmt = [insertStmt UTF8String];
             
             sqlite3_exec(dataDB, sql_stmt, NULL, NULL, &error);
+            //sqlite3_exec(dataDB, sql_stmt2, NULL, NULL, &error);
            // sqlite3_exec(dataDB, sql_insert, NULL ,NULL , &error);
             //sqlite3_exec(dataDB, temp_stmt, NULL, NULL, &error);
             sqlite3_close(dataDB);
@@ -86,7 +88,7 @@
     NSString *costValue = [NSString stringWithFormat:@"%.2f", aPlan.cost];
     cell.detailTextLabel.text = [dollars stringByAppendingString:costValue];
     // cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f", aPlan.cost];
-    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     //cell.textLabel.text = aPlan.date;
     //cell.accessoryView.backgroundColor =  [NSString stringWithFormat:@"TEST"];
     //NSString *testext = @"JAY";
@@ -111,18 +113,23 @@
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    mydata *aPlan = [arrayOfData objectAtIndex:indexPath.row];
-    NSString *dollars = @"Peak(####kWh) = $####\nOff Peak(####kWh) = $####\nSupply(####kWh) = $####\n\n<ORIGIN ENRGY>\nRate Freeze - # - Day Time Use\n[Citipower Network]\nhttp://www.originenergy.com.au/******\nA 1% discount of the energy usage charges will apply if your bill is paid by direct debit.";
-    NSString *concat = @"";
-    NSString *plan = aPlan.planName;
-    NSString *date = aPlan.date;
-    NSString *costValue = [NSString stringWithFormat:@"%.2f", aPlan.cost];
     
+    mydata *aPlan2 = [arrayOfData objectAtIndex:indexPath.row];
 
+    NSString *plan = aPlan2.planName;
+    NSString *startDate = [NSString stringWithFormat: @"%d", aPlan2.startDate];
+    NSString *endingDate = [NSString stringWithFormat: @"%d", aPlan2.endDate];
+    NSString *costValue = [NSString stringWithFormat: @"%.2f", aPlan2.cost];
+    NSString *discount = [NSString stringWithFormat:@"%d", aPlan2.discount];
     
+    NSString *cellMessage = [NSString stringWithFormat: @"From %@ to %@\nPeak(####kWh) = $####\nOff Peak(####kWh) = $####\nSupply(####kWh) = $####\n\n%@\nRate Freeze - # - Day Time Use\n[Citipower Network]\nhttp://www.originenergy.com.au/******\nA %@%% discount of the energy usage charges will apply if your bill is paid by direct debit.", startDate, endingDate, plan, discount];
+
+   // NSString *sentence = [NSString stringWithFormat: @"This is a story about a %@ dog and a %@ that was always high. They both lived in a %@ in the middle of nowhere. Today, the %@ %@ over the dog. The dog got angry and bit the %@ %@ times. The end.",adj,noun,place,noun,verb,noun,number];
+    //storyTV.text = sentence;
+
     UIAlertView *messageAlert = [[UIAlertView alloc]
                                  //initWithTitle:@"Row Selected" message:@"You've selected a row" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                                    initWithTitle:plan message:[dollars stringByAppendingString:costValue] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                    initWithTitle:plan message:cellMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     // Display Alert Message
     [messageAlert show];
@@ -167,17 +174,21 @@
         NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM PLANS"];
         const char* query_sql = [querySql UTF8String];
         
-        if(sqlite3_prepare(dataDB, query_sql, -2, &statement, NULL)==SQLITE_OK){
+        if(sqlite3_prepare(dataDB, query_sql, -1, &statement, NULL)==SQLITE_OK){
             while (sqlite3_step(statement)==SQLITE_ROW) {
                 NSString *PlanName = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
-                NSString  *costString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
-                NSString   *Date    = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                NSString  *costString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
+                NSString   *StartDateString    = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                NSString *EndingDateString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
+                NSString *Discount = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
                 
                 mydata *plandata = [[mydata alloc]init];
                 
                 [plandata setPlanName:PlanName];
-                [plandata setDate:Date];
+                [plandata setStartDate:[StartDateString intValue]];
                 [plandata setCost:[costString floatValue]];
+                [plandata setEndDate:[EndingDateString intValue]];
+                [plandata setDiscount:[Discount intValue]];
                 
                 [arrayOfData addObject:plandata];
             }
@@ -185,7 +196,6 @@
     }
     [[self tableres]reloadData];
    
-    
     label.text = @"Updated!";
 }
 
@@ -205,7 +215,7 @@
     if (sqlite3_open([dbPathString UTF8String], &dataDB)== SQLITE_OK) {
         
         
-        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,DATE,COST) values ('%s', '%s', '%d')",[self.plannameField.text UTF8String],[self.dateField.text UTF8String],[self.costField.text intValue]];
+        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,STARTDATE,COST) values ('%s', '%d', '%d')",[self.plannameField.text UTF8String],[self.dateField.text intValue],[self.costField.text intValue]];
         //NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,DATE,COST) values ('IngeniSUPER PLAN', '08-22-2013', '299.99')"];
         const char *insert_stmt = [insertStmt UTF8String];
         
@@ -215,8 +225,9 @@
             mydata *person  = [[mydata alloc] init];
             
             [person setPlanName:self.plannameField.text];
-            [person setDate:self.dateField.text];
+            [person setStartDate:[self.dateField.text intValue]];
             [person setCost:[self.costField.text intValue]];
+           
             
             [arrayOfData addObject: person];
         }
@@ -239,11 +250,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView:) name:@"ReloadTableView" object:nil];
     }
     return self;
-}
-
-- (void)reloadTableView:(NSNotification*)notification
-{
-    [tableres reloadData];
 }
 
 

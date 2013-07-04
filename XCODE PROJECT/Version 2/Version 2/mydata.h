@@ -11,7 +11,12 @@
 @interface mydata : NSObject
 
 @property(nonatomic, strong)NSString *planName;
-@property(nonatomic, strong)NSString *date;
+@property(assign)int startDate;
+@property(assign)int endDate;
 @property(assign)float cost;
+@property(assign)float kwUsed;
+@property(assign)int discount;
+@property(nonatomic, strong)NSString *details;
+
 
 @end
