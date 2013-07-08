@@ -11,8 +11,9 @@
 @interface mydata : NSObject
 
 @property(nonatomic, strong)NSString *planName;
-@property(assign)int startDate;
-@property(assign)int endDate;
+@property(nonatomic, strong)NSString *startDate;
+@property(nonatomic, strong)NSString *endDate;
+@property(nonatomic, strong)NSString *person;
 @property(assign)float cost;
 @property(assign)float kwUsed;
 @property(assign)int discount;
