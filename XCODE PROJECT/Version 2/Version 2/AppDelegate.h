@@ -9,11 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @class FirstViewController;
+@class MainItemViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) FirstViewController *viewController;
+
+@property (strong, nonatomic) MainItemViewController   *UIView;
+
+//@property (strong, nonatomic) MainItemViewController *viewController;
 
 @end

@@ -13,10 +13,10 @@
     NSMutableArray *arrayOfData;
     sqlite3 *dataDB;
     NSString *dbPathString;
-}
+    
+    }
 
 @end
-
 
 
 @implementation FirstViewController
@@ -32,6 +32,12 @@
     [[self tableres]setDelegate:self];
     [[self tableres]setDataSource:self];
     [self createOrOpenDB];
+    
+
+    [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(qbutton:) userInfo:nil repeats:YES];
+    //[[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    //[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector: userInfo:nil repeats:YES];
+  
     
 }
 
@@ -99,9 +105,19 @@
     //cell.accessoryView = @"";
     //[imageView release];
     
-    
     return cell;
+    
+    
 }
+
+//-(void)onTimer {
+  //  int x;
+    //[[self tableres]reloadData];
+   //x++;
+    //NSString *val = x;
+   //label.text = [NSString stringWithFormat:@"%d", x];
+    //
+//}
 
 /************Getting info from tapped cellview**************/
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -134,7 +150,6 @@
     UIAlertView *messageAlert = [[UIAlertView alloc]
                                  //initWithTitle:@"Row Selected" message:@"You've selected a row" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                                     initWithTitle:@"Message" message:cellMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    
     // Display Alert Message
     [messageAlert show];
     
@@ -157,7 +172,7 @@
 
 
 - (IBAction)mysearch:(id)sender {
-    
+     // [searchField resignFirstResponder];
     NSString *qsearch = searchField.text;
     sqlite3_stmt *statement;
     //result.text = searchField.text;
@@ -166,7 +181,7 @@
         [arrayOfData removeAllObjects];
         
         
-        NSString *nsquery = [[NSString alloc] initWithFormat:@"SELECT * FROM PLANS WHERE PLANNAME LIKE '%%%@%%'", qsearch];
+        NSString *nsquery = [[NSString alloc] initWithFormat:@"SELECT * FROM PLANS WHERE PLANNAME LIKE '%%%@%%' ORDER BY COST DESC", qsearch];
         const char* query_sql = [nsquery UTF8String];
         
         if(sqlite3_prepare(dataDB, query_sql, -1, &statement, NULL)==SQLITE_OK){
@@ -197,13 +212,13 @@
 
 /***************Querying(Updating)****************/
 - (IBAction)qbutton:(id)sender {
-    
+    //[searchField resignFirstResponder];
     sqlite3_stmt *statement;
     
     if (sqlite3_open([dbPathString UTF8String],&dataDB)==SQLITE_OK) {
         [arrayOfData removeAllObjects];
         
-        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM PLANS"];
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM PLANS ORDER BY COST DESC"];
         const char* query_sql = [querySql UTF8String];
         
         if(sqlite3_prepare(dataDB, query_sql, -1, &statement, NULL)==SQLITE_OK){
@@ -228,20 +243,20 @@
     }
     [[self tableres]reloadData];
    
-    label.text = @"Updated!";
+label.text = @"Updated!";
 }
 
 /*************CLoseKeyboard on touch***************/
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event    {
     [super touchesBegan:touches withEvent:event];
-    [[self searchField]resignFirstResponder];
-    //[[self costField]resignFirstResponder];
+    
+   [[self searchField]resignFirstResponder];
     //[[self plannameField]resignFirstResponder];
 }
 
 
-
-
+@end
+/*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (self) {
@@ -250,13 +265,57 @@
     }
     return self;
 }
-
+*/
 
 
 /***************searching Code******************/
 
 
-@end
+//- (IBAction)dateSearch:(id)sender {
+    
+/*
+    [searchField resignFirstResponder];
+    NSDate *qdate = searchField;
+    sqlite3_stmt *statement;
+    //result.text = searchField.text;
+    
+    if (sqlite3_open([dbPathString UTF8String],&dataDB)==SQLITE_OK) {
+        [arrayOfData removeAllObjects];
+        
+        
+        NSString *nsquery = [[NSString alloc] initWithFormat:@"SELECT * FROM PLANS WHERE STARTDATE >= '@%'", qdate NSDate];
+        const char* query_sql = [nsquery UTF8String];
+        
+        if(sqlite3_prepare(dataDB, query_sql, -1, &statement, NULL)==SQLITE_OK){
+            while (sqlite3_step(statement)==SQLITE_ROW) {
+                NSString *PlanName = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
+                NSString  *costString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
+                NSString   *StartDateString    = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                NSString *EndingDateString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
+                NSString *Discount = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
+                
+                mydata *myquery = [[mydata alloc]init];
+                
+                [myquery setPlanName:PlanName];
+                [myquery setStartDate:StartDateString];
+                [myquery setCost:[costString floatValue]];
+                [myquery setEndDate:EndingDateString];
+                [myquery setDiscount:[Discount intValue]];
+                
+                //[person setAge:[ageString intValue]];
+                
+                [arrayOfData addObject:myquery];
+            }
+        }
+    }
+    [[self tableres]reloadData];
+    label.text = @"Date Results:";*/
+//}
+
+
+
+
+
 
 
 /*********Something**********/

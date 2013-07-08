@@ -8,17 +8,39 @@
         <scene sceneID="fMS-4b-s3b">
             <objects>
                 <viewController id="bNp-0n-kbK" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="oiA-2a-8PF">
+                    <view key="view" contentMode="scaleToFill" id="oiA-2a-8PF" customClass="GraphicsViewControllerView">
                         <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="fPY-7J-aYf">
+                                <items>
+                                    <navigationItem title="Current Power Usage" id="TAB-Ib-Wcf"/>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORH-ym-T5s">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fPY-7J-aYf" firstAttribute="trailing" secondItem="oiA-2a-8PF" secondAttribute="trailing" type="default" id="6Gh-q1-z3x"/>
+                            <constraint firstItem="ORH-ym-T5s" firstAttribute="leading" secondItem="oiA-2a-8PF" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Sow-c7-Cis"/>
+                            <constraint firstItem="fPY-7J-aYf" firstAttribute="leading" secondItem="oiA-2a-8PF" secondAttribute="leading" type="default" id="bSj-Su-teC"/>
+                            <constraint firstItem="ORH-ym-T5s" firstAttribute="top" secondItem="oiA-2a-8PF" secondAttribute="top" constant="57" id="jIe-1F-NJe"/>
+                            <constraint firstItem="fPY-7J-aYf" firstAttribute="top" secondItem="oiA-2a-8PF" secondAttribute="top" type="default" id="lSZ-Cp-S3b"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="countlabel" destination="ORH-ym-T5s" id="w8m-mh-WBw"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="tDd-bt-PvM"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Knj-P8-M56" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-851" y="-140"/>
+            <point key="canvasLocation" x="-944" y="-145"/>
         </scene>
         <!--View Controller - Item-->
         <scene sceneID="FTm-9d-g95">
@@ -97,7 +119,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" sectionIndexMinimumDisplayRowCount="10" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="IjI-Ga-ihD">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="258" id="F9D-FP-mkH"/>
+                                    <constraint firstAttribute="height" constant="263" id="tWR-wa-9Bn"/>
                                 </constraints>
                                 <sections/>
                                 <connections>
@@ -109,14 +131,20 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zQp-AI-l9q">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="202" id="ifq-cd-3On"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNc-1N-WFZ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDM-YM-coM">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dateSearch:" destination="pha-8s-LVP" eventType="touchUpInside" id="Qnt-nW-w80"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTB-xa-rwc">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Search">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -126,39 +154,48 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="mysearch:" destination="pha-8s-LVP" eventType="touchUpInside" id="aAs-1C-bwR"/>
+                                    <action selector="mysearch:" destination="pha-8s-LVP" eventType="touchUpInside" id="LgS-5E-9iq"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fSj-P5-kmp">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="187" id="sJZ-rc-kz2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="5Ka-nL-zfL" secondAttribute="trailing" constant="9" id="4E8-3C-btR"/>
-                            <constraint firstItem="fNc-1N-WFZ" firstAttribute="baseline" secondItem="zQp-AI-l9q" secondAttribute="baseline" type="default" id="EPw-JF-mfH"/>
-                            <constraint firstItem="5Ka-nL-zfL" firstAttribute="top" secondItem="dwS-mi-GIb" secondAttribute="top" type="default" id="EU9-tY-PgA"/>
+                            <constraint firstItem="MDM-YM-coM" firstAttribute="top" secondItem="wiX-ky-DVB" secondAttribute="top" constant="59" id="GzT-Up-QN3"/>
+                            <constraint firstItem="IjI-Ga-ihD" firstAttribute="top" secondItem="OTB-xa-rwc" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Hho-ob-0Ec"/>
                             <constraint firstItem="IjI-Ga-ihD" firstAttribute="trailing" secondItem="wiX-ky-DVB" secondAttribute="trailing" type="default" id="KJ6-Ax-egQ"/>
-                            <constraint firstItem="fNc-1N-WFZ" firstAttribute="top" secondItem="5Ka-nL-zfL" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="NK7-gv-fN4"/>
+                            <constraint firstItem="dwS-mi-GIb" firstAttribute="top" secondItem="5Ka-nL-zfL" secondAttribute="top" type="default" id="PJk-yj-LlQ"/>
+                            <constraint firstItem="fSj-P5-kmp" firstAttribute="baseline" secondItem="OTB-xa-rwc" secondAttribute="baseline" type="default" id="UdL-aG-KVh"/>
                             <constraint firstItem="dwS-mi-GIb" firstAttribute="leading" secondItem="wiX-ky-DVB" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Uh9-Ix-bLy"/>
-                            <constraint firstItem="dwS-mi-GIb" firstAttribute="top" secondItem="wiX-ky-DVB" secondAttribute="top" constant="46" id="WMk-tX-lFO"/>
                             <constraint firstItem="IjI-Ga-ihD" firstAttribute="leading" secondItem="wiX-ky-DVB" secondAttribute="leading" type="default" id="Wis-uy-cwk"/>
+                            <constraint firstItem="OTB-xa-rwc" firstAttribute="leading" secondItem="5Ka-nL-zfL" secondAttribute="leading" type="default" id="XO7-hh-L5b"/>
                             <constraint firstItem="4qE-by-MvW" firstAttribute="leading" secondItem="wiX-ky-DVB" secondAttribute="leading" type="default" id="a9C-mz-kp0"/>
-                            <constraint firstItem="fNc-1N-WFZ" firstAttribute="centerX" secondItem="5Ka-nL-zfL" secondAttribute="centerX" type="default" id="ieK-yD-CyB"/>
+                            <constraint firstAttribute="trailing" secondItem="MDM-YM-coM" secondAttribute="trailing" constant="130" id="cmI-NN-kav"/>
                             <constraint firstItem="IjI-Ga-ihD" firstAttribute="bottom" secondItem="wiX-ky-DVB" secondAttribute="bottom" type="default" id="mwb-0e-zOe"/>
+                            <constraint firstItem="OTB-xa-rwc" firstAttribute="top" secondItem="5Ka-nL-zfL" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="pvF-HO-jMr"/>
                             <constraint firstItem="4qE-by-MvW" firstAttribute="trailing" secondItem="wiX-ky-DVB" secondAttribute="trailing" type="default" id="qEW-h8-rhp"/>
+                            <constraint firstItem="fSj-P5-kmp" firstAttribute="leading" secondItem="wiX-ky-DVB" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="rBc-8C-2q6"/>
                             <constraint firstItem="4qE-by-MvW" firstAttribute="top" secondItem="wiX-ky-DVB" secondAttribute="top" constant="-6" id="tu8-wp-GMQ"/>
-                            <constraint firstItem="zQp-AI-l9q" firstAttribute="leading" secondItem="wiX-ky-DVB" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="xdX-zv-td7"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="ND8-JU-7Gd"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="label" destination="dwS-mi-GIb" id="dmo-eL-DLO"/>
-                        <outlet property="searchField" destination="zQp-AI-l9q" id="s0P-43-lb7"/>
+                        <outlet property="searchField" destination="fSj-P5-kmp" id="K4J-YC-6BF"/>
                         <outlet property="tableres" destination="IjI-Ga-ihD" id="P0z-Pw-yJF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZwH-SZ-LtQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1241" y="-815"/>
+            <point key="canvasLocation" x="-944" y="-709"/>
         </scene>
         <!--View Controller - Item-->
         <scene sceneID="dqr-AK-CQj">
@@ -190,7 +227,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nAY-rv-FMF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-851" y="449"/>
+            <point key="canvasLocation" x="-931" y="489"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="7sl-1B-tnp">
@@ -215,20 +252,25 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2x-Xk-0JD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1350" y="-262"/>
+            <point key="canvasLocation" x="-1892" y="-332"/>
         </scene>
     </scenes>
     <classes>
         <class className="FirstViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstViewController.h"/>
             <relationships>
+                <relationship kind="action" name="dateSearch:"/>
                 <relationship kind="action" name="mysearch:"/>
                 <relationship kind="action" name="qbutton:"/>
-                <relationship kind="action" name="searchbtn:"/>
-                <relationship kind="action" name="searhbtn:"/>
                 <relationship kind="outlet" name="label" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="searchField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tableres" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="GraphicsViewControllerView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphicsViewControllerView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="countlabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">

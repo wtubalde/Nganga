@@ -20,7 +20,13 @@
 //@property (weak, nonatomic) IBOutlet UITextField *dateField;
 //@property (weak, nonatomic) IBOutlet UITextField *costField;
 @property (weak, nonatomic) IBOutlet UITextField *searchField;
+
 - (IBAction)mysearch:(id)sender;
+
+//@property (weak, nonatomic) IBOutlet UITextField *startdateq;
+//@property (weak, nonatomic) IBOutlet UITextField *enddateq;
+
+- (IBAction)dateSearch:(id)sender;
 
 
 
