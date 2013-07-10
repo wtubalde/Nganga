@@ -48,6 +48,7 @@
     
 }
 
+
 /****************Database Creation and Checking if Already Existing************/
 -(void)createOrOpenDB
 {
@@ -64,13 +65,13 @@
         
         if (sqlite3_open(dbPath, &dataDB)==SQLITE_OK) {
             const char *sql_stmt = "CREATE TABLE IF NOT EXISTS PLANS (PLANID INTEGER PRIMARY KEY AUTOINCREMENT, PLANNAME TEXT, STARTDATE INTEGER, ENDINGDATE INTEGER,COST REAL, KWUSED INTEGER, DISCOUNTS INTEGER)";
-            //const char *sql_stmt2 = "CREATE TABLE IF NOT EXISTS PLANDETAIL (DETAILID INTEGER PRIMARY KEY AUTOINCREMENT, PLANNAME TEXT, KWUSED INTEGER, PERFECTDISCOUT)";
+            const char *sql_stmt2 = "CREATE TABLE IF NOT EXISTS POSITIONS (X INTEGER, Y INTEGER)";
             //const char *sql_insert = "INSERT INTO PLANS(PLANNAME,DATE,COST) values ('IngeniSUPER PLAN', '08-22-2013', '299.99')";
             //NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,DATE,COST) values ('IngeniSUPER PLAN', '08-22-2013', '299.99')"];
             // const char *insert_stmt = [insertStmt UTF8String];
             
             sqlite3_exec(dataDB, sql_stmt, NULL, NULL, &error);
-            //sqlite3_exec(dataDB, sql_stmt2, NULL, NULL, &error);
+            sqlite3_exec(dataDB, sql_stmt2, NULL, NULL, &error);
             //sqlite3_exec(dataDB, sql_insert, NULL ,NULL , &error);
             //sqlite3_exec(dataDB, temp_stmt, NULL, NULL, &error);
             sqlite3_close(dataDB);
@@ -110,15 +111,6 @@
     
 }
 
-//-(void)onTimer {
-  //  int x;
-    //[[self tableres]reloadData];
-   //x++;
-    //NSString *val = x;
-   //label.text = [NSString stringWithFormat:@"%d", x];
-    //
-//}
-
 /************Getting info from tapped cellview**************/
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -148,7 +140,6 @@
     //storyTV.text = sentence;
 
     UIAlertView *messageAlert = [[UIAlertView alloc]
-                                 //initWithTitle:@"Row Selected" message:@"You've selected a row" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                                     initWithTitle:@"Message" message:cellMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     // Display Alert Message
     [messageAlert show];
@@ -244,6 +235,7 @@
     [[self tableres]reloadData];
    
 label.text = @"Updated!";
+    
 }
 
 /*************CLoseKeyboard on touch***************/

@@ -7,11 +7,16 @@
 //
 
 #import "GraphicsViewControllerView.h"
+#import "FirstViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 
 @interface GraphicsViewControllerView (){
     int count;
+    NSMutableArray *arrayOfData;
+    sqlite3 *dataDB;
+    NSString *dbPathString;
+    float newPositionY;
     
 }
 
@@ -20,35 +25,16 @@
 @implementation GraphicsViewControllerView
 
 
-
-- (void)viewDidLoad
-{
-    [self viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-   // arrayOfData = [[NSMutableArray alloc]init];
-   // [[self tableres]setDelegate:self];
-   // [[self tableres]setDataSource:self];
-    //[self createOrOpenDB];
-   
-    
-    
-    [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(onTimer:) userInfo:nil repeats:YES];
-    //[[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-    //[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector: userInfo:nil repeats:YES];
-    
-    
-}
-
-
 - (id)initWithFrame:(CGRect)frame
 {
     
     
+   // [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(drawRect:) userInfo:nil repeats:YES];
     self = [super initWithFrame:frame];
     
     if (self) {
         // Initialization code
-        [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(drawRect:) userInfo:nil repeats:YES];
+
     }
     return self;
     
@@ -57,33 +43,37 @@
 
 -(void) enumerateFont{
     for(NSString *familyName in [UIFont familyNames]){
-        NSLog(@"Font Family = %@", familyName);}
+        NSLog(@"Font Family = %@", familyName);
+    
+        }
+
+ 
 }
 
 
+/*-(void)drawRect:(CGRect)rect   {
+    
+    
+       [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(drawRect:) userInfo:nil repeats:YES];
+    
+    count++;
+    
+    _countlabel.text = [NSString stringWithFormat:@"%d", count ];
+}*/
 
--(void)onTimer {
-    
-//[[self tableres]reloadData];
-//count++;
-//NSString *val = count;
-//_countlabel.text = [NSString stringWithFormat:@"%2f", count];
-   
-    //[[self tableres]reloadData];
-    // count++;
-    //NSString *val = count;
-   _countlabel.text = [NSString stringWithFormat:@"%d", count++];
-    //_countlabel
-    //
-    
-}
+   //[NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(drawRect:) userInfo:nil repeats:YES];
 
 
 
--(void)drawRect:(CGRect)rect{
+/***************Querying(Updating)****************/
+-(void)drawRect:(CGRect)rect  {
+  
+     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(drawRect:) userInfo:nil repeats:YES];
+    count++;
+    
+    _countlabel.text = [NSString stringWithFormat:@"%d", count ];
     
     
-    //[NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(onTimer:) userInfo:nil repeats:YES];
     CGContextRef currentContext1 = UIGraphicsGetCurrentContext();
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     
@@ -91,48 +81,60 @@
     CGFloat *startColorComponents =
     (CGFloat *)CGColorGetComponents([startColor CGColor]);
     
-    UIColor *endColor = [UIColor yellowColor];
+    UIColor *midColor = [UIColor yellowColor];
+    CGFloat *midColorComponents =
+    (CGFloat *)CGColorGetComponents([midColor CGColor]);
+    
+    UIColor *mid1Color = [UIColor greenColor];
+    CGFloat *mid1ColorComponents =
+    (CGFloat *)CGColorGetComponents([mid1Color CGColor]);
+    
+    
+    UIColor *endColor = [UIColor cyanColor];
     CGFloat *endColorComponents =
     (CGFloat *)CGColorGetComponents([endColor CGColor]);
     
-    UIColor *end1Color = [UIColor blueColor];
-    CGFloat *end1ColorComponents =
-    (CGFloat *)CGColorGetComponents([end1Color CGColor]);
     
-    
-    
-    
-    CGFloat colorComponents[12] = {
+    CGFloat colorComponents[16] = {
         
-        startColorComponents[0],
-        startColorComponents[1],
+        startColorComponents[3],
         startColorComponents[2],
-        startColorComponents[3], /*first color blue*/
+        startColorComponents[1],
+        startColorComponents[0],
+        
+        
+        midColorComponents[0],
+        midColorComponents[1],
+        midColorComponents[2],
+        midColorComponents[3],
+
+        
+        mid1ColorComponents[0],
+        mid1ColorComponents[1],
+        mid1ColorComponents[2],
+        mid1ColorComponents[3],
+        
         
         endColorComponents[0],
         endColorComponents[1],
         endColorComponents[2],
-        endColorComponents[3], /*second color green*/
+        endColorComponents[3],
         
-        end1ColorComponents[0],
-        end1ColorComponents[1],
-        end1ColorComponents[2],
-        end1ColorComponents[3],/*third color red*/
-        
-        
-        
-        
+
     };
     
-    CGFloat colorIndices[3] = {
+    CGFloat colorIndices[5] = {
         0.0f, /*color 0 components in the array*/
-        0.5f, /*color 1 components in the array*/
-        1.0f,/*color 2 components in the array*/
+        0.4f, /*color 1 components in the array*/
+        0.64f,/*color 2 components in the array*/
+        0.84f,
+        0.99f
+        
         
     };
     
     CGGradientRef gradient =
-    CGGradientCreateWithColorComponents(colorSpace, (const CGFloat *)&colorComponents,(const CGFloat *)&colorIndices, 3);
+    CGGradientCreateWithColorComponents(colorSpace, (const CGFloat *)&colorComponents,(const CGFloat *)&colorIndices, 5);
     
     CGColorSpaceRelease(colorSpace);
     
@@ -140,9 +142,9 @@
     
     CGPoint startPoint, endPoint;
     
-    startPoint = CGPointMake(0,100);//CGPointMake(screenBounds.size.width, startPoint.y);
+    startPoint = CGPointMake(0,80);//CGPointMake(screenBounds.size.width, startPoint.y);
     
-    endPoint = CGPointMake(0, 415);//CGPointMake(0.0f, screenBounds.size.height / 0.35f);
+    endPoint = CGPointMake(0, 435);//CGPointMake(0.0f, screenBounds.size.height / 0.35f);
     
     CGContextDrawLinearGradient(currentContext1, gradient, startPoint, endPoint, 0);
     
@@ -158,21 +160,18 @@
     
     [[UIColor brownColor] set];
     
-    
-    for (x=0; x<=500; x+=10.5) {
-        //        NSString *val =
+    //Drawing Bars
+    for (x=0; x<=500; x+=6) {
         CGContextRef currentContext = UIGraphicsGetCurrentContext();
         CGContextSetLineWidth(currentContext, 1.3f);
         CGContextMoveToPoint(currentContext, 0.0f, x);
         CGContextAddLineToPoint(currentContext, 340.0f, x);
         CGContextStrokePath(currentContext);
-        
-        
     }
     
     
     
-    
+   
     //create indicator
     float indicatorData[] = {-200.0f, -10.0f, -15.0f, -20.0f, -30.0f, -40.0f, -50.0f, -150.0f};
     
@@ -182,7 +181,7 @@
     
     CGRect rectangle = CGRectMake(0.0f, 340.0f, 50.0f, 70.0f);
     
-    CGAffineTransform transform1 = CGAffineTransformMakeTranslation(0.0f, count);
+    CGAffineTransform transform1 = CGAffineTransformMakeTranslation(0.0f, indicatorData[0]);
     
     CGPathAddRect(path, &transform1, rectangle);
     
@@ -198,20 +197,21 @@
     
     CGContextDrawPath(currentContext, kCGPathFillStroke);
     
-        CGPathRelease(path);
+    CGPathRelease(path);
+    
+    
     //Bezier path for indicator curve line
-        UIBezierPath *path1 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(69, 237)
-                                                            radius:30
-                                                        startAngle:-155
-                                                          endAngle:(7.0f/22.0f)
-                                                         clockwise:NO];
-        
-        path1.lineCapStyle = kCGLineCapRound;
-        path1.lineWidth = 4.0f;
-        [[UIColor brownColor] setStroke];
-        [path1 stroke];
-
-       // }
+    UIBezierPath *path1 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(69, 10)
+     radius:30
+     startAngle:-155
+     endAngle:(7.0f/22.0f)
+     clockwise:NO];
+     
+     path1.lineCapStyle = kCGLineCapRound;
+     path1.lineWidth = 4.0f;
+     [[UIColor blackColor] setStroke];
+     [path1 stroke];
+     
     
     //create text inside indicator
     UIColor *magentaColor = [UIColor colorWithRed:0.0f
@@ -248,7 +248,7 @@
     //create header
     CGMutablePathRef headerPath = CGPathCreateMutable();
     
-    CGRect header = CGRectMake(0.0f, 40.0f, 320.0f, 60.0f);
+    CGRect header = CGRectMake(0.0f, 20.0f, 320.0f, 60.0f);
     
     CGPathAddRect(headerPath, NULL, header);
     
@@ -336,20 +336,11 @@
     CGContextShowTextAtPoint(context1, 30, 400, [theText2 cStringUsingEncoding:NSUTF8StringEncoding], [theText2 length]);
     CGContextSetTextMatrix(context1, CGAffineTransformRotate(CGAffineTransformMake(1.0, 0.0, 0.0, -1.0, 0.0, 0.0), M_PI / 2));
     
+    
+    }
 
     
+ 
 
-    
- }
-
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

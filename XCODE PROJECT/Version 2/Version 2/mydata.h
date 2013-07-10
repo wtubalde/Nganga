@@ -15,6 +15,7 @@
 @property(nonatomic, strong)NSString *endDate;
 @property(nonatomic, strong)NSString *person;
 @property(assign)float cost;
+@property(assign)float positionY;
 @property(assign)float kwUsed;
 @property(assign)int discount;
 @property(nonatomic, strong)NSString *details;

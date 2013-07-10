@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "sqlite3.h"
+#import "mydata.h"
 //#define kCGTextFill 021242
 
 @interface GraphicsViewControllerView : UIView

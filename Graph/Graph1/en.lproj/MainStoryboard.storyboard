@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="5">
+            <objects>
+                <viewController id="2" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rL-7e-IFW" customClass="GraphView">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="auo-mS-Xpx">
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <items>
+                                    <navigationItem title="average energy use" id="tGx-N0-Hzd"/>
+                                </items>
+                            </navigationBar>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wVi-G8-J3c">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem systemItem="favorites" id="EdK-8l-KOx"/>
+                                    <tabBarItem systemItem="more" id="f42-0t-Btj"/>
+                                </items>
+                            </tabBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7rL-7e-IFW" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="91f-iS-Xap"/>
+                            <constraint firstItem="7rL-7e-IFW" firstAttribute="top" secondItem="auo-mS-Xpx" secondAttribute="bottom" type="default" id="OTN-ET-4hd"/>
+                            <constraint firstItem="wVi-G8-J3c" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="Xgy-1g-58b"/>
+                            <constraint firstItem="wVi-G8-J3c" firstAttribute="top" secondItem="7rL-7e-IFW" secondAttribute="bottom" type="default" id="ZRc-np-yIv"/>
+                            <constraint firstItem="7rL-7e-IFW" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="brB-wa-dX1"/>
+                            <constraint firstItem="auo-mS-Xpx" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="eDm-BU-Qmf"/>
+                            <constraint firstItem="auo-mS-Xpx" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="kKe-Xd-93L"/>
+                            <constraint firstItem="wVi-G8-J3c" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="s50-iN-AmC"/>
+                            <constraint firstItem="auo-mS-Xpx" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="yLP-Um-3cp"/>
+                            <constraint firstItem="wVi-G8-J3c" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="zaA-dK-brV"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="GraphView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphView.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

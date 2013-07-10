@@ -68,7 +68,6 @@
 		222756DB177C426800F219CD = {
 			isa = PBXGroup;
 			children = (
-				220E48E9178AB3E30088448D /* QuartzCore.framework */,
 				2227570D177C43BF00F219CD /* libsqlite3.0.dylib */,
 				222756ED177C426800F219CD /* Version 2 */,
 				222756E6177C426800F219CD /* Frameworks */,
@@ -87,6 +86,7 @@
 		222756E6177C426800F219CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				220E48E9178AB3E30088448D /* QuartzCore.framework */,
 				222756E7177C426800F219CD /* UIKit.framework */,
 				222756E9177C426800F219CD /* Foundation.framework */,
 				222756EB177C426800F219CD /* CoreGraphics.framework */,
