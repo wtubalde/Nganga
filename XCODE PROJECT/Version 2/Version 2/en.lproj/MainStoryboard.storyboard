@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="FJI-Ob-Whq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Uzd-Ts-OFc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--View Controller - Item 2-->
+        <!--View Controller-->
         <scene sceneID="fMS-4b-s3b">
             <objects>
                 <viewController id="bNp-0n-kbK" sceneMemberID="viewController">
@@ -22,75 +22,97 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Refresh" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xP3-Ye-i67">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRu-N8-g6y">
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="refresh:" destination="oiA-2a-8PF" eventType="touchUpInside" id="BkC-Bs-PrM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="fPY-7J-aYf" firstAttribute="trailing" secondItem="oiA-2a-8PF" secondAttribute="trailing" type="default" id="6Gh-q1-z3x"/>
+                            <constraint firstItem="xP3-Ye-i67" firstAttribute="baseline" secondItem="ORH-ym-T5s" secondAttribute="baseline" type="default" id="KQB-Xt-iht"/>
+                            <constraint firstItem="xP3-Ye-i67" firstAttribute="bottom" secondItem="PRu-N8-g6y" secondAttribute="bottom" type="default" id="M1h-us-PNk"/>
                             <constraint firstItem="ORH-ym-T5s" firstAttribute="leading" secondItem="oiA-2a-8PF" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Sow-c7-Cis"/>
                             <constraint firstItem="fPY-7J-aYf" firstAttribute="leading" secondItem="oiA-2a-8PF" secondAttribute="leading" type="default" id="bSj-Su-teC"/>
-                            <constraint firstItem="ORH-ym-T5s" firstAttribute="top" secondItem="oiA-2a-8PF" secondAttribute="top" constant="57" id="jIe-1F-NJe"/>
+                            <constraint firstItem="PRu-N8-g6y" firstAttribute="leading" secondItem="xP3-Ye-i67" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="gZN-tv-T9c"/>
+                            <constraint firstItem="PRu-N8-g6y" firstAttribute="top" secondItem="oiA-2a-8PF" secondAttribute="top" constant="50" id="ii1-KT-USx"/>
                             <constraint firstItem="fPY-7J-aYf" firstAttribute="top" secondItem="oiA-2a-8PF" secondAttribute="top" type="default" id="lSZ-Cp-S3b"/>
+                            <constraint firstAttribute="trailing" secondItem="PRu-N8-g6y" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="wSP-sb-e6o"/>
                         </constraints>
                         <connections>
                             <outlet property="countlabel" destination="ORH-ym-T5s" id="w8m-mh-WBw"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="tDd-bt-PvM"/>
+                    <tabBarItem key="tabBarItem" systemItem="featured" id="tDd-bt-PvM"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Knj-P8-M56" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-944" y="-145"/>
+            <point key="canvasLocation" x="-990" y="-300"/>
         </scene>
-        <!--View Controller - Item-->
+        <!--Plan View Controller-->
         <scene sceneID="FTm-9d-g95">
             <objects>
-                <viewController id="4ZD-vl-XBH" sceneMemberID="viewController">
+                <viewController id="4ZD-vl-XBH" customClass="CPlanViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qEG-aQ-5vV">
                         <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="eGd-E6-WFu">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="328" id="TVM-re-Eb0"/>
+                                </constraints>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="Afc-5P-zk9">
+                                <items>
+                                    <navigationItem title="Compare Plan" id="dw8-2T-1a0"/>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8e-QH-ymv">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eGd-E6-WFu" firstAttribute="trailing" secondItem="qEG-aQ-5vV" secondAttribute="trailing" type="default" id="92d-e6-JtX"/>
+                            <constraint firstItem="eGd-E6-WFu" firstAttribute="bottom" secondItem="qEG-aQ-5vV" secondAttribute="bottom" type="default" id="KF4-Sr-iNZ"/>
+                            <constraint firstItem="eGd-E6-WFu" firstAttribute="top" secondItem="x8e-QH-ymv" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Nyk-m8-WCX"/>
+                            <constraint firstItem="Afc-5P-zk9" firstAttribute="trailing" secondItem="qEG-aQ-5vV" secondAttribute="trailing" type="default" id="PKg-QS-9JU"/>
+                            <constraint firstItem="Afc-5P-zk9" firstAttribute="top" secondItem="qEG-aQ-5vV" secondAttribute="top" type="default" id="SO1-hf-eFr"/>
+                            <constraint firstItem="eGd-E6-WFu" firstAttribute="leading" secondItem="qEG-aQ-5vV" secondAttribute="leading" type="default" id="VAE-Vd-B1l"/>
+                            <constraint firstItem="x8e-QH-ymv" firstAttribute="leading" secondItem="qEG-aQ-5vV" secondAttribute="leading" constant="8" id="cej-DJ-IfQ"/>
+                            <constraint firstItem="Afc-5P-zk9" firstAttribute="leading" secondItem="qEG-aQ-5vV" secondAttribute="leading" type="default" id="zKy-SM-yu9"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="mVD-7G-X42"/>
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="mVD-7G-X42"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="label" destination="x8e-QH-ymv" id="pZR-L7-GaQ"/>
+                        <outlet property="tableres" destination="eGd-E6-WFu" id="O0B-ve-KHP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1iW-YP-JJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-361" y="-140"/>
+            <point key="canvasLocation" x="-302" y="-840"/>
         </scene>
-        <!--View Controller - Item-->
-        <scene sceneID="0Sh-Y3-uKm">
-            <objects>
-                <viewController id="V3T-SN-oM5" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="2wy-7F-7eu">
-                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="1Mw-ag-Osl"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JfV-B9-zAP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="65" y="-140"/>
-        </scene>
-        <!--View Controller - Item-->
-        <scene sceneID="zxF-vX-WOf">
-            <objects>
-                <viewController id="NST-Gv-gHg" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jLx-iD-lDN">
-                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="edn-qy-NA9"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WTj-lt-xse" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-361" y="449"/>
-        </scene>
-        <!--First View Controller - Item 1-->
+        <!--First View Controller-->
         <scene sceneID="9NM-JY-g5j">
             <objects>
                 <viewController id="pha-8s-LVP" customClass="FirstViewController" sceneMemberID="viewController">
@@ -170,7 +192,8 @@
                             <constraint firstItem="4qE-by-MvW" firstAttribute="top" secondItem="wiX-ky-DVB" secondAttribute="top" constant="-6" id="tu8-wp-GMQ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="ND8-JU-7Gd"/>
+                    <tabBarItem key="tabBarItem" systemItem="bookmarks" id="f1v-Jw-1pk"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="label" destination="dwS-mi-GIb" id="dmo-eL-DLO"/>
@@ -180,44 +203,48 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZwH-SZ-LtQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-944" y="-709"/>
+            <point key="canvasLocation" x="-798" y="-891"/>
         </scene>
-        <!--View Controller - Item-->
-        <scene sceneID="dqr-AK-CQj">
-            <objects>
-                <viewController id="x4x-cf-vED" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mXG-sh-Tqj">
-                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="p9b-Ip-nad"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PIE-3o-fOh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-361" y="-729"/>
-        </scene>
-        <!--View Controller - Item-->
+        <!--View Controller-->
         <scene sceneID="Ud5-7u-UaA">
             <objects>
                 <viewController id="Lz0-5o-BLw" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="10b-Fx-VJ5">
                         <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="BIX-Cg-L93">
+                                <items>
+                                    <navigationItem title="Average Enery Usage" id="tVI-LJ-VOj"/>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oeh-SQ-2XG" customClass="GraphView">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oeh-SQ-2XG" firstAttribute="top" secondItem="BIX-Cg-L93" secondAttribute="bottom" type="default" id="4D5-fG-bvz"/>
+                            <constraint firstItem="oeh-SQ-2XG" firstAttribute="trailing" secondItem="10b-Fx-VJ5" secondAttribute="trailing" type="default" id="4yP-dr-xI6"/>
+                            <constraint firstItem="oeh-SQ-2XG" firstAttribute="leading" secondItem="10b-Fx-VJ5" secondAttribute="leading" type="default" id="MPA-Yr-zDL"/>
+                            <constraint firstItem="BIX-Cg-L93" firstAttribute="leading" secondItem="10b-Fx-VJ5" secondAttribute="leading" type="default" id="Smu-eo-6fq"/>
+                            <constraint firstItem="BIX-Cg-L93" firstAttribute="trailing" secondItem="10b-Fx-VJ5" secondAttribute="trailing" type="default" id="uxD-Cv-yU7"/>
+                            <constraint firstItem="oeh-SQ-2XG" firstAttribute="bottom" secondItem="10b-Fx-VJ5" secondAttribute="bottom" type="default" id="vNC-hx-FZH"/>
+                            <constraint firstItem="BIX-Cg-L93" firstAttribute="top" secondItem="10b-Fx-VJ5" secondAttribute="top" type="default" id="xOP-4f-bYL"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="KRM-ih-nTq"/>
+                    <tabBarItem key="tabBarItem" systemItem="mostRecent" id="KRM-ih-nTq"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nAY-rv-FMF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-931" y="489"/>
+            <point key="canvasLocation" x="-586" y="-281"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="7sl-1B-tnp">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="FJI-Ob-Whq" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="YRS-mT-Xdp"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="aCn-9a-V2x">
@@ -229,39 +256,55 @@
                         <segue destination="pha-8s-LVP" kind="relationship" relationship="viewControllers" id="TP9-T9-WT9"/>
                         <segue destination="bNp-0n-kbK" kind="relationship" relationship="viewControllers" id="N3l-ZM-hR8"/>
                         <segue destination="Lz0-5o-BLw" kind="relationship" relationship="viewControllers" id="MEb-ZI-PCV"/>
-                        <segue destination="x4x-cf-vED" kind="relationship" relationship="viewControllers" id="nH4-hF-wHO"/>
                         <segue destination="4ZD-vl-XBH" kind="relationship" relationship="viewControllers" id="5Vq-iV-KdZ"/>
-                        <segue destination="NST-Gv-gHg" kind="relationship" relationship="viewControllers" id="AG3-hQ-0t6"/>
-                        <segue destination="V3T-SN-oM5" kind="relationship" relationship="viewControllers" id="YXo-zn-P7O"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g2x-Xk-0JD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1886" y="-258"/>
+            <point key="canvasLocation" x="-1705" y="-591"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="KnT-dO-yRY">
+            <objects>
+                <viewController id="Uzd-Ts-OFc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="D3e-nu-HeR">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="odV-mG-wlk">
+                                <color key="backgroundColor" red="0.52156862749999999" green="0.46524154007290808" blue="0.15682583970938943" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="5Re-ty-fpA"/>
+                                    <constraint firstAttribute="width" constant="208" id="Ets-dr-nzd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <color key="tintColor" white="0.56221648185483875" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="FJI-Ob-Whq" kind="modal" modalTransitionStyle="crossDissolve" id="4e6-aa-JJq"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="odV-mG-wlk" firstAttribute="leading" secondItem="D3e-nu-HeR" secondAttribute="leading" constant="53" id="29g-OK-knN"/>
+                            <constraint firstItem="odV-mG-wlk" firstAttribute="top" secondItem="D3e-nu-HeR" secondAttribute="top" constant="185" id="gAd-bk-HnV"/>
+                        </constraints>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bKe-cw-u9p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2093" y="-661"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="FirstViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dateSearch:"/>
-                <relationship kind="action" name="mysearch:"/>
-                <relationship kind="action" name="qbutton:"/>
-                <relationship kind="outlet" name="label" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="searchField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tableres" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="GraphicsViewControllerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphicsViewControllerView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="countlabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

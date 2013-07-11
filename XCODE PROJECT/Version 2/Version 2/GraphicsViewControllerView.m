@@ -24,11 +24,17 @@
 
 @implementation GraphicsViewControllerView
 
+-(void)ViewDidload{
+    //[super drawRect:(Rect)];
+    [self firstquery];
+    
+}
+
 
 - (id)initWithFrame:(CGRect)frame
 {
     
-    
+     [self firstquery];
    // [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(drawRect:) userInfo:nil repeats:YES];
     self = [super initWithFrame:frame];
     
@@ -51,27 +57,72 @@
 }
 
 
-/*-(void)drawRect:(CGRect)rect   {
+-(void)firstquery{
     
     
-       [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(drawRect:) userInfo:nil repeats:YES];
     
-    count++;
+ /*   sqlite3_stmt *statementt;
+    //result.text = searchField.text;
     
-    _countlabel.text = [NSString stringWithFormat:@"%d", count ];
-}*/
-
-   //[NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(drawRect:) userInfo:nil repeats:YES];
+    if (sqlite3_open([dbPathString UTF8String],&dataDB)==SQLITE_OK) {
+        [arrayOfData removeAllObjects];
+        
+        
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM POSITIONS"];
+        const char* query_sql = [querySql UTF8String];
+        
+        if(sqlite3_prepare(dataDB, query_sql, 0, &statementt, NULL)==SQLITE_OK){
+            while (sqlite3_step(statementt)==SQLITE_ROW) {
+                NSString *PlanName = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statementt, 2)];
+                
+                _countlabel.text = PlanName;
+                
+            }
+        }
+    }*/
+    
+}
 
 
 
 /***************Querying(Updating)****************/
--(void)drawRect:(CGRect)rect  {
-  
-     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(drawRect:) userInfo:nil repeats:YES];
+
+
+
+- (IBAction)refresh:(id)sender {
     count++;
+    //[self drawRect];
+    [self performSelector:@selector(drawRect:) withObject:nil afterDelay:0.2];
+    _countlabel.text = [NSString stringWithFormat:@"%d",count];
     
-    _countlabel.text = [NSString stringWithFormat:@"%d", count ];
+    
+}
+
+
+
+-(void)drawRect:(CGRect)rect  {
+    
+    
+  /*  sqlite3_stmt *statementt;
+    //result.text = searchField.text;
+    
+    if (sqlite3_open([dbPathString UTF8String],&dataDB)==SQLITE_OK) {
+        [arrayOfData removeAllObjects];
+        
+        
+        NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM POSITIONS WHERE COMPONENT='Bar1'"];
+        const char* query_sql = [querySql UTF8String];
+        
+        if(sqlite3_prepare(dataDB, query_sql, 0, &statementt, NULL)==SQLITE_OK){
+            while (sqlite3_step(statementt)==SQLITE_ROW) {
+                NSString *PlanName = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statementt, 2)];
+                
+                _countlabel.text = PlanName;
+                
+            }
+        }
+    }
+    */
     
     
     CGContextRef currentContext1 = UIGraphicsGetCurrentContext();
@@ -107,7 +158,7 @@
         midColorComponents[1],
         midColorComponents[2],
         midColorComponents[3],
-
+        
         
         mid1ColorComponents[0],
         mid1ColorComponents[1],
@@ -120,13 +171,13 @@
         endColorComponents[2],
         endColorComponents[3],
         
-
+        
     };
     
     CGFloat colorIndices[5] = {
         0.0f, /*color 0 components in the array*/
         0.4f, /*color 1 components in the array*/
-        0.64f,/*color 2 components in the array*/
+        0.64f,
         0.84f,
         0.99f
         
@@ -171,12 +222,12 @@
     
     
     
-   
+    
     //create indicator
     float indicatorData[] = {-200.0f, -10.0f, -15.0f, -20.0f, -30.0f, -40.0f, -50.0f, -150.0f};
     
     //for (int y=0; y < sizeof(indicatorData); y++){
-        
+    
     CGMutablePathRef path = CGPathCreateMutable();
     
     CGRect rectangle = CGRectMake(0.0f, 340.0f, 50.0f, 70.0f);
@@ -201,17 +252,17 @@
     
     
     //Bezier path for indicator curve line
-    UIBezierPath *path1 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(69, 10)
-     radius:30
-     startAngle:-155
-     endAngle:(7.0f/22.0f)
-     clockwise:NO];
-     
-     path1.lineCapStyle = kCGLineCapRound;
-     path1.lineWidth = 4.0f;
-     [[UIColor blackColor] setStroke];
-     [path1 stroke];
-     
+    UIBezierPath *path1 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(69, 130)
+                                                         radius:30
+                                                     startAngle:-155
+                                                       endAngle:(7.0f/22.0f)
+                                                      clockwise:NO];
+    
+    path1.lineCapStyle = kCGLineCapRound;
+    path1.lineWidth = 4.0f;
+    [[UIColor blackColor] setStroke];
+    [path1 stroke];
+    
     
     //create text inside indicator
     UIColor *magentaColor = [UIColor colorWithRed:0.0f
@@ -314,10 +365,10 @@
     UIFont *helveticaBold2 = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0f];
     NSString *tariffLabel = @"current tariff in use";
     [tariffLabel drawInRect:CGRectMake(115,390,150,70) withFont:helveticaBold2];
-   
     
     
-    // create rotated text for indicator 
+    
+    // create rotated text for indicator
     
     
     CGContextRef   context1 = UIGraphicsGetCurrentContext();
@@ -337,10 +388,5 @@
     CGContextSetTextMatrix(context1, CGAffineTransformRotate(CGAffineTransformMake(1.0, 0.0, 0.0, -1.0, 0.0, 0.0), M_PI / 2));
     
     
-    }
-
-    
- 
-
-
+}
 @end

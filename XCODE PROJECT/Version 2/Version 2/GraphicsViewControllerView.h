@@ -15,6 +15,7 @@
 @interface GraphicsViewControllerView : UIView
 
 @property (weak, nonatomic) IBOutlet UILabel *countlabel;
+- (IBAction)refresh:(id)sender;
 
 
 @end

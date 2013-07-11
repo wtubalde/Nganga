@@ -6,23 +6,22 @@
 //  Copyright (c) 2013 Openkit. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "CplanViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController (){
+@interface CPlanViewController (){
     NSMutableArray *arrayOfData;
     sqlite3 *dataDB;
     NSString *dbPathString;
     
-    }
+}
 
 @end
 
 
-@implementation FirstViewController
+@implementation CPlanViewController
 @synthesize label;
 @synthesize tableres;
-@synthesize searchField;
 
 - (void)viewDidLoad
 {
@@ -32,12 +31,9 @@
     [[self tableres]setDelegate:self];
     [[self tableres]setDataSource:self];
     [self createOrOpenDB];
-    [self firstquery];
-
-    //[NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(qbutton:) userInfo:nil repeats:YES];
-    //[[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-    //[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector: userInfo:nil repeats:YES];
-  
+    [self qload];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.6 target:self selector:@selector(qload) userInfo:nil repeats:YES];
     
 }
 
@@ -47,30 +43,6 @@
     [super viewDidUnload];
     
 }
-
--(void)firstquery{
-    
-    sqlite3_stmt *statementt;
-    //result.text = searchField.text;
-    
-    if (sqlite3_open([dbPathString UTF8String],&dataDB)==SQLITE_OK) {
-        [arrayOfData removeAllObjects];
-        
-        
-    NSString *querySql = [NSString stringWithFormat:@"SELECT * FROM POSITIONS WHERE COMPONENT='Bar1' "];
-        const char* query_sql = [querySql UTF8String];
-        
-        if(sqlite3_prepare(dataDB, query_sql, -1, &statementt, NULL)==SQLITE_OK){
-            while (sqlite3_step(statementt)==SQLITE_ROW) {
-                NSString *PlanName = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statementt, 2)];
-    
-                label.text = PlanName;
-            }
-        }
-    }
-    
-}
-
 
 
 /****************Database Creation and Checking if Already Existing************/
@@ -140,8 +112,8 @@
 {
     
     static NSString *CellIdentifier = @"cellType";
-   
-   
+    
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
@@ -149,9 +121,9 @@
     }
     
     mydata *aPlan2 = [arrayOfData objectAtIndex:indexPath.row];
-
+    
     NSString *plan = aPlan2.planName;
-   // NSString *startDate = [NSString stringWithFormat: @"%d", aPlan2.startDate];
+    // NSString *startDate = [NSString stringWithFormat: @"%d", aPlan2.startDate];
     NSString *startDate = aPlan2.startDate;
     //NSString *endingDate = [NSString stringWithFormat: @"%d", aPlan2.endDate];
     NSString *endingDate = aPlan2.endDate;
@@ -159,12 +131,12 @@
     NSString *discount = [NSString stringWithFormat:@"%d", aPlan2.discount];
     
     NSString *cellMessage = [NSString stringWithFormat: @"From %@ to %@\nPeak(####kWh) = $####\nOff Peak(####kWh) = $####\nSupply(####kWh) = $####\n\n%@\nRate Freeze - # - Day Time Use\n[Citipower Network]\nhttp://www.originenergy.com.au/******\nA %@%% discount of the energy usage charges will apply if your bill is paid by direct debit.", startDate, endingDate, plan, discount];
-
+    
     //NSString *sentence = [NSString stringWithFormat: @"This is a story about a %@ dog and a %@ that was always high. They both lived in a %@ in the middle of nowhere. Today, the %@ %@ over the dog. The dog got angry and bit the %@ %@ times. The end.",adj,noun,place,noun,verb,noun,number];
     //storyTV.text = sentence;
-
+    
     UIAlertView *messageAlert = [[UIAlertView alloc]
-                                    initWithTitle:@"Message" message:cellMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                 initWithTitle:@"Message" message:cellMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     // Display Alert Message
     [messageAlert show];
     
@@ -186,47 +158,8 @@
 }
 
 
-- (IBAction)mysearch:(id)sender {
-     // [searchField resignFirstResponder];
-    NSString *qsearch = searchField.text;
-    sqlite3_stmt *statement;
-    //result.text = searchField.text;
-    
-    if (sqlite3_open([dbPathString UTF8String],&dataDB)==SQLITE_OK) {
-        [arrayOfData removeAllObjects];
-        
-        
-        NSString *nsquery = [[NSString alloc] initWithFormat:@"SELECT * FROM PLANS WHERE PLANNAME LIKE '%%%@%%' ORDER BY COST DESC", qsearch];
-        const char* query_sql = [nsquery UTF8String];
-        
-        if(sqlite3_prepare(dataDB, query_sql, -1, &statement, NULL)==SQLITE_OK){
-            while (sqlite3_step(statement)==SQLITE_ROW) {
-                NSString *PlanName = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
-                NSString *costString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
-                NSString *StartDateString    = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
-                NSString *EndingDateString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
-                NSString *Discount = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
-                
-                mydata *myquery = [[mydata alloc]init];
-                
-                [myquery setPlanName:PlanName];
-                [myquery setStartDate:StartDateString];
-                [myquery setCost:[costString floatValue]];
-                [myquery setEndDate:EndingDateString];
-                [myquery setDiscount:[Discount intValue]];
-                
-                //[person setAge:[ageString intValue]];
-                
-                [arrayOfData addObject:myquery];
-            }
-        }
-    }
-    [[self tableres]reloadData];
-    label.text = @"Results:";
-}
-
 /***************Querying(Updating)****************/
-- (IBAction)qbutton:(id)sender {
+- (void)qload{
     //[searchField resignFirstResponder];
     sqlite3_stmt *statement;
     
@@ -257,77 +190,77 @@
         }
     }
     [[self tableres]reloadData];
-   
-label.text = @"Updated!";
+    
+    label.text = @"Updated!";
     
 }
 
-/*************CLoseKeyboard on touch***************/
+/*************CLoseKeyboard on touch***************
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event    {
     [super touchesBegan:touches withEvent:event];
     
-   [[self searchField]resignFirstResponder];
+    [[self searchField]resignFirstResponder];
     //[[self plannameField]resignFirstResponder];
-}
+}*/
 
 
 
 
 @end
 /*
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    if (self) {
-        // Custom initialization
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView:) name:@"ReloadTableView" object:nil];
-    }
-    return self;
-}
-*/
+ - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+ {
+ if (self) {
+ // Custom initialization
+ [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView:) name:@"ReloadTableView" object:nil];
+ }
+ return self;
+ }
+ */
 
 
 /***************searching Code******************/
 
 
 //- (IBAction)dateSearch:(id)sender {
-    
+
 /*
-    [searchField resignFirstResponder];
-    NSDate *qdate = searchField;
-    sqlite3_stmt *statement;
-    //result.text = searchField.text;
-    
-    if (sqlite3_open([dbPathString UTF8String],&dataDB)==SQLITE_OK) {
-        [arrayOfData removeAllObjects];
-        
-        
-        NSString *nsquery = [[NSString alloc] initWithFormat:@"SELECT * FROM PLANS WHERE STARTDATE >= '@%'", qdate NSDate];
-        const char* query_sql = [nsquery UTF8String];
-        
-        if(sqlite3_prepare(dataDB, query_sql, -1, &statement, NULL)==SQLITE_OK){
-            while (sqlite3_step(statement)==SQLITE_ROW) {
-                NSString *PlanName = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
-                NSString  *costString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
-                NSString   *StartDateString    = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
-                NSString *EndingDateString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
-                NSString *Discount = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
-                
-                mydata *myquery = [[mydata alloc]init];
-                
-                [myquery setPlanName:PlanName];
-                [myquery setStartDate:StartDateString];
-                [myquery setCost:[costString floatValue]];
-                [myquery setEndDate:EndingDateString];
-                [myquery setDiscount:[Discount intValue]];
-                
-                //[person setAge:[ageString intValue]];
-                
-                [arrayOfData addObject:myquery];
-            }
-        }
-    }
-    [[self tableres]reloadData];
-    label.text = @"Date Results:";*/
+ [searchField resignFirstResponder];
+ NSDate *qdate = searchField;
+ sqlite3_stmt *statement;
+ //result.text = searchField.text;
+ 
+ if (sqlite3_open([dbPathString UTF8String],&dataDB)==SQLITE_OK) {
+ [arrayOfData removeAllObjects];
+ 
+ 
+ NSString *nsquery = [[NSString alloc] initWithFormat:@"SELECT * FROM PLANS WHERE STARTDATE >= '@%'", qdate NSDate];
+ const char* query_sql = [nsquery UTF8String];
+ 
+ if(sqlite3_prepare(dataDB, query_sql, -1, &statement, NULL)==SQLITE_OK){
+ while (sqlite3_step(statement)==SQLITE_ROW) {
+ NSString *PlanName = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
+ NSString  *costString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 4)];
+ NSString   *StartDateString    = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+ NSString *EndingDateString = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 3)];
+ NSString *Discount = [[NSString alloc]initWithUTF8String:(const char *)sqlite3_column_text(statement, 6)];
+ 
+ mydata *myquery = [[mydata alloc]init];
+ 
+ [myquery setPlanName:PlanName];
+ [myquery setStartDate:StartDateString];
+ [myquery setCost:[costString floatValue]];
+ [myquery setEndDate:EndingDateString];
+ [myquery setDiscount:[Discount intValue]];
+ 
+ //[person setAge:[ageString intValue]];
+ 
+ [arrayOfData addObject:myquery];
+ }
+ }
+ }
+ [[self tableres]reloadData];
+ label.text = @"Date Results:";*/
 //}
 
 
@@ -351,39 +284,39 @@ label.text = @"Updated!";
 
 /*********adding data Code***********/
 /*- (IBAction)addDatabutton:(id)sender {
-    
-    
-    char *error;
-    if (sqlite3_open([dbPathString UTF8String], &dataDB)== SQLITE_OK) {
-        
-        
-        NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,STARTDATE,COST) values ('%s', '%s', '%d')",[self.plannameField.text UTF8String],[self.dateField.text UTF8String],[self.costField.text intValue]];
-        //NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,DATE,COST) values ('IngeniSUPER PLAN', '08-22-2013', '299.99')"];
-        const char *insert_stmt = [insertStmt UTF8String];
-        
-        if (sqlite3_exec(dataDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK) {
-            NSLog(@"Person Added");
-            
-            mydata *person  = [[mydata alloc] init];
-            
-            [person setPlanName:self.plannameField.text];
-            [person setStartDate:self.dateField.text];
-            [person setCost:[self.costField.text intValue]];
-           
-            
-            [arrayOfData addObject: person];
-        }
-    }
-    sqlite3_close(dataDB);
-     [[self tableres]reloadData];
-    label.text = @"Data Added";
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}*/
+ 
+ 
+ char *error;
+ if (sqlite3_open([dbPathString UTF8String], &dataDB)== SQLITE_OK) {
+ 
+ 
+ NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,STARTDATE,COST) values ('%s', '%s', '%d')",[self.plannameField.text UTF8String],[self.dateField.text UTF8String],[self.costField.text intValue]];
+ //NSString *insertStmt = [NSString stringWithFormat:@"INSERT INTO PLANS(PLANNAME,DATE,COST) values ('IngeniSUPER PLAN', '08-22-2013', '299.99')"];
+ const char *insert_stmt = [insertStmt UTF8String];
+ 
+ if (sqlite3_exec(dataDB, insert_stmt, NULL, NULL, &error)==SQLITE_OK) {
+ NSLog(@"Person Added");
+ 
+ mydata *person  = [[mydata alloc] init];
+ 
+ [person setPlanName:self.plannameField.text];
+ [person setStartDate:self.dateField.text];
+ [person setCost:[self.costField.text intValue]];
+ 
+ 
+ [arrayOfData addObject: person];
+ }
+ }
+ sqlite3_close(dataDB);
+ [[self tableres]reloadData];
+ label.text = @"Data Added";
+ }
+ 
+ - (void)didReceiveMemoryWarning
+ {
+ [super didReceiveMemoryWarning];
+ // Dispose of any resources that can be recreated.
+ }*/
 
 
 

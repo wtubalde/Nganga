@@ -22,6 +22,8 @@
 		22275704177C426800F219CD /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22275703177C426800F219CD /* FirstViewController.m */; };
 		2227570E177C43BF00F219CD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2227570D177C43BF00F219CD /* libsqlite3.0.dylib */; };
 		22275711177C490A00F219CD /* mydata.m in Sources */ = {isa = PBXBuildFile; fileRef = 22275710177C490A00F219CD /* mydata.m */; };
+		2275A7D1178E94CA00C04CB9 /* CplanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2275A7D0178E94CA00C04CB9 /* CplanViewController.m */; };
+		2275A7D4178EA2D700C04CB9 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2275A7D3178EA2D700C04CB9 /* GraphView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,10 @@
 		2227570D177C43BF00F219CD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		2227570F177C490A00F219CD /* mydata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mydata.h; sourceTree = "<group>"; };
 		22275710177C490A00F219CD /* mydata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mydata.m; sourceTree = "<group>"; };
+		2275A7CF178E94CA00C04CB9 /* CplanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CplanViewController.h; sourceTree = "<group>"; };
+		2275A7D0178E94CA00C04CB9 /* CplanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CplanViewController.m; sourceTree = "<group>"; };
+		2275A7D2178EA2D700C04CB9 /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
+		2275A7D3178EA2D700C04CB9 /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,8 +110,12 @@
 				220E48EB178AB6580088448D /* GraphicsViewControllerView.h */,
 				220E48EC178AB6580088448D /* GraphicsViewControllerView.m */,
 				222756FF177C426800F219CD /* MainStoryboard.storyboard */,
+				2275A7CF178E94CA00C04CB9 /* CplanViewController.h */,
+				2275A7D0178E94CA00C04CB9 /* CplanViewController.m */,
 				22275702177C426800F219CD /* FirstViewController.h */,
 				22275703177C426800F219CD /* FirstViewController.m */,
+				2275A7D2178EA2D700C04CB9 /* GraphView.h */,
+				2275A7D3178EA2D700C04CB9 /* GraphView.m */,
 				222756EE177C426800F219CD /* Supporting Files */,
 			);
 			path = "Version 2";
@@ -196,6 +206,8 @@
 				22275704177C426800F219CD /* FirstViewController.m in Sources */,
 				22275711177C490A00F219CD /* mydata.m in Sources */,
 				220E48ED178AB6580088448D /* GraphicsViewControllerView.m in Sources */,
+				2275A7D1178E94CA00C04CB9 /* CplanViewController.m in Sources */,
+				2275A7D4178EA2D700C04CB9 /* GraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
